@@ -5,7 +5,6 @@ Tested on Macbook Pro running MacOS Mojave version 10.14.4.
 
 Environment information:
 - Python 3.6.5 
-- Scrapy 1.7.1
 
 ## Installation
 To install dependencies, run:
