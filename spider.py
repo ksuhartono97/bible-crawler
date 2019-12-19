@@ -3,7 +3,7 @@ import regex as re
 
 class BibleSpider(scrapy.Spider):
     name = 'biblespider'
-    start_urls = ['https://www.biblegateway.com/passage/?search=Genesis+1&version=NASB']
+    start_urls = ['https://www.biblegateway.com/passage/?search=Genesis+1&version=NKJV']
     custom_settings = {
         'AUTOTHROTTLE_ENABLED': True,
         'LOG_LEVEL' : 'INFO'
@@ -32,18 +32,18 @@ class BibleSpider(scrapy.Spider):
         else:
             book = book_and_chapter
             chapternum = ""
-        
+
         # Clean up input
         book = book.strip()
         chapternum = chapternum.strip()
         chapternum = re.sub("[^0-9]", "", chapternum)
         chapternum = '1' if chapternum == "" else chapternum
-        
+
         chapterText = " "
-        
+
         # Get part of page where passage is shown
         passagediv = response.xpath("//div[@class='passage-wrap']")
-        
+
         # Flag to detect if this is first verse as first verse has no verse number
         foundVerseNum = False
 
@@ -60,7 +60,7 @@ class BibleSpider(scrapy.Spider):
             # for v in passage.xpath("./text()[ancestor::h3]"):
             #     chapterText += "999\xa0"
             #     chapterText += v.get()
-            
+
             # Eliminate unnecessary 
             for v in passage.xpath(".//text()[not(ancestor::*[@class='chapternum']) \
                 and not(ancestor::h3) and not(ancestor::sup)]"):
